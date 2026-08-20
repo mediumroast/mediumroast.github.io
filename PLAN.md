@@ -3,7 +3,19 @@
 ## Status
 
 - **Phase 1 (this repo, `mediumroast.github.io`) is executed** on branch
-  `rebuild-opensource-page` — see commit `f6c6d3a`. Not yet pushed/merged.
+  `rebuild-opensource-page`, pushed as [PR #1](https://github.com/mediumroast/mediumroast.github.io/pull/1).
+  A follow-up round fixed visual-parity issues found by comparing against the
+  live mediumroast.io frontend directly (computed styles pulled via
+  browser JS, not just the written style guide): header now matches the
+  real sticky/blurred dark header, page uses the real body-level gradient
+  background instead of flat section fills, cards are transparent/bordered
+  (matching `product-walkthrough-block`) instead of being filled a
+  different color per status, icon buttons are outline-only with a
+  hover color change, equal card heights per row, verified official
+  brand SVG icons (GitHub/npm/PyPI) replacing hand-drawn ones, and
+  per-project license corrected against each repo's actual `LICENSE`
+  file (`mr_markdown_builder` is MIT, not Apache-2.0 — the rest are
+  Apache-2.0). Intro copy no longer claims a blanket license.
 - **Phase 2 (downstream project pages) is planned below, not yet executed.**
 
 ## Context
