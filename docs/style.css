@@ -1,6 +1,7 @@
 /* Mediumroast open source projects — hand-authored static styles.
-   Tokens ported from the mediumroast.io UX style guide
-   (manifold/wiki/guides/ux/style-guide.md). */
+   Tokens verified against the live mediumroast.io frontend (computed
+   styles pulled from www.mediumroast.io, not just the written style
+   guide) so this page reads as part of the same site family. */
 
 :root {
   --color-brand-dark: #0F0D0E;
@@ -28,8 +29,8 @@
   --radius-md: 20px;
   --radius-lg: 28px;
 
-  --shadow-soft: 0 2px 8px rgba(15, 13, 14, 0.06);
-  --shadow-card: 0 8px 24px rgba(15, 13, 14, 0.12);
+  --shadow-soft: 0 20px 50px rgba(15, 13, 14, 0.12);
+  --shadow-card: 0 18px 40px rgba(15, 13, 14, 0.08);
 
   --container-width: 1140px;
 }
@@ -47,7 +48,10 @@ body {
   margin: 0;
   font-family: var(--font-sans);
   color: var(--color-brand-dark);
-  background: var(--color-white);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(220, 125, 0, 0.08), transparent 28%),
+    linear-gradient(180deg, #fffaf7 0%, #ffffff 45%, #f8fbff 100%);
+  background-attachment: fixed;
 }
 
 a {
@@ -70,10 +74,15 @@ a:focus-visible {
   margin: 0 auto;
 }
 
-/* Header */
+/* Header — sticky, blurred dark glass, matching mediumroast.io */
 
 .site-header {
-  background: var(--color-brand-dark);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(15, 13, 14, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   padding: var(--space-3) 0;
 }
 
@@ -118,7 +127,6 @@ a:focus-visible {
 
 .hero {
   padding: var(--space-7) 0 var(--space-6);
-  background: var(--color-off-white);
 }
 
 .hero h1 {
@@ -136,7 +144,8 @@ a:focus-visible {
   color: rgba(15, 13, 14, 0.75);
 }
 
-/* Sections */
+/* Sections — no per-section fill; the body gradient carries through
+   consistently behind Active and Incubating alike. */
 
 .projects-section {
   padding: var(--space-6) 0 var(--space-7);
@@ -170,29 +179,29 @@ a:focus-visible {
 .project-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  align-items: stretch;
   gap: var(--space-4);
 }
 
-/* Cards */
+/* Cards — transparent/bordered shell (matches mediumroast.io's
+   product-walkthrough-block: no fill color, just border + soft shadow),
+   consistent between Active and Incubating. Status is conveyed only by
+   the badge, not by recoloring the whole card. */
 
 .project-card {
   display: flex;
   flex-direction: column;
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(15, 13, 14, 0.12);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-soft);
+  box-shadow: var(--shadow-card);
   padding: var(--space-4);
   transition: box-shadow 0.2s ease-in-out;
 }
 
 .project-card:hover {
-  box-shadow: var(--shadow-card);
-}
-
-.project-card--incubating {
-  background: var(--color-light-blue);
-  border-color: transparent;
+  box-shadow: var(--shadow-soft);
 }
 
 .card-top {
@@ -218,8 +227,9 @@ a:focus-visible {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  background: var(--color-border);
-  color: var(--color-brand-dark);
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid var(--color-border);
+  color: var(--color-muted);
 }
 
 .project-card p {
@@ -229,16 +239,23 @@ a:focus-visible {
   color: rgba(15, 13, 14, 0.8);
 }
 
+.card-body {
+  flex: 1;
+}
+
 .card-status-note {
   font-size: 13px;
   color: var(--color-muted);
 }
 
+/* License line — same position/format on every card: directly above
+   the link row, label + linked SPDX name, nothing else. */
+
 .card-license {
-  margin-top: auto;
   font-size: 13px;
   color: var(--color-muted);
   padding-top: var(--space-3);
+  margin-top: auto;
 }
 
 .card-license a {
@@ -248,11 +265,14 @@ a:focus-visible {
 
 .card-links {
   display: flex;
-  gap: var(--space-3);
+  gap: var(--space-2);
   padding-top: var(--space-3);
   margin-top: var(--space-3);
   border-top: 1px solid var(--color-border);
 }
+
+/* Icon buttons: background matches the card (transparent), just an
+   outline — color only shifts on hover/focus to signal it's a link. */
 
 .card-links a {
   display: inline-flex;
@@ -260,20 +280,25 @@ a:focus-visible {
   justify-content: center;
   width: 36px;
   height: 36px;
+  flex-shrink: 0;
   border-radius: var(--radius-sm);
+  background: transparent;
+  border: 1px solid rgba(15, 13, 14, 0.16);
   color: var(--color-brand-dark);
-  background: var(--color-off-white);
+  transition: border-color 0.15s ease-in-out, color 0.15s ease-in-out;
 }
 
 .card-links a:hover,
 .card-links a:focus-visible {
-  background: var(--color-tech-cyan);
-  color: var(--color-white);
+  border-color: var(--color-tech-cyan);
+  color: var(--color-tech-cyan);
 }
 
 .card-links svg {
   width: 18px;
   height: 18px;
+  flex-shrink: 0;
+  display: block;
 }
 
 /* Footer */
